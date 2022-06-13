@@ -17,26 +17,31 @@ button {
 
 textarea {
   grid-column: 1/5;
+  background-color: lightgray;
+  font-weight: bold;
+  text-align: right;
 }
 
 #calculator-div {
   display: grid;  
-  place-items: center;  
-  grid-template-rows: auto auto;
+  place-items: center;    
   width: 800px;
   height: 600px;
   border-color: red;
+  align-items: center;
 }
 
 #buttons-div {
   display: grid;
-  grid-template-rows: auto auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto;
   grid-template-columns: auto auto auto auto;
-  justify-content: center;
-  width: 20%;
+  justify-content: stretch; 
+  width: 200px;
+  height: 300px;  
+  border-color: blue;
 }
 
-#AC {
+#clear {
   background-color: red;
   color: white;
   grid-column: 1/3;
@@ -44,7 +49,15 @@ textarea {
 }
 
 #equal {
-  grid-row: 5/7; 
+  grid-row: -3/-1; 
+  grid-column: -2/-1;
   height: auto;
   background-color: lightgrey;
 }
+
+#zero {
+  grid-column: 1/3;
+  grid-row: 6/7;
+  width: auto;
+}
+
