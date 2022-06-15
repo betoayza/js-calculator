@@ -7,11 +7,22 @@ export const Calculator = () => {
     console.log(e);
     console.log(e.target.innerHTML);
     const key=e.target.innerHTML;
-    if(display==='0'){
+    if(display==='0' && key!=='.'){
       setDisplay(key);
     }else{
-      const combination=display+key;
-      setDisplay(combination);
+      if(display.includes('.') && key!=='.'){
+        let expression=display+key;        
+        setDisplay(expression);        
+      }else{
+        if(!display.includes('.')){
+          let expression2=display+key;        
+          setDisplay(expression2); 
+        }else{
+          if(display.includes('.') && key==='.'){
+            setDisplay(display);
+          }
+        }
+      }
     }
   };
 
@@ -21,13 +32,15 @@ export const Calculator = () => {
     console.log(expression);
     const result=eval(expression);
     console.log(result);
-    setDisplay(result);
+    const strResult=result.toString();
+    setDisplay(strResult);
   };
 
   return (
     <div id="calculator-div">
       <div id="buttons-div">
-      <textarea name="display" id="display" value={display} readOnly/>
+      {/* <textarea name="display" id="display" value={display} /> */}
+      <label id="display">{display}</label>
         <button id="clear" onClick={(e)=>setDisplay('0')}>AC</button>
         <button id="divide" onClick={handleAddKey}>/</button>
         <button id="multiply" onClick={handleAddKey}>*</button>

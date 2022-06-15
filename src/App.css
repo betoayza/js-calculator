@@ -15,11 +15,13 @@ button {
   height: 50px;
 }
 
-textarea {
+label {
   grid-column: 1/5;
-  background-color: lightgray;
+  color: lightgray;
+  background-color: black;
   font-weight: bold;
   text-align: right;
+  height: 50px;
 }
 
 #calculator-div {
@@ -39,6 +41,7 @@ textarea {
   width: 200px;
   height: 300px;  
   border-color: blue;
+  background-color: darkslategray;
 }
 
 #clear {
@@ -48,7 +51,7 @@ textarea {
   width: auto;
 }
 
-#equal {
+#equals {
   grid-row: -3/-1; 
   grid-column: -2/-1;
   height: auto;
