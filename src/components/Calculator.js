@@ -3,10 +3,16 @@ import React, {useState} from "react";
 export const Calculator = () => {
   const [display, setDisplay] = useState('0');
 
+  const validateOperators=()=>{
+    const regExpRepOps=/('+'|'-'|'*'|'\/'){2,}/;
+    const match=display.match(regExpRepOps);
+    return match;
+  };
+
   const handleAddKey=e=>{
     console.log(e);
     console.log(e.target.innerHTML);
-    const key=e.target.innerHTML;
+    const key=e.target.innerHTML;    
     if(display==='0' && key!=='.'){
       setDisplay(key);
     }else{
@@ -27,19 +33,22 @@ export const Calculator = () => {
   };
 
   const handleResult=e=>{
-    console.log(e.target);
-    const expression=document.getElementById("display").innerHTML;
-    console.log(expression);
-    const result=eval(expression);
-    console.log(result);
-    const strResult=result.toString();
-    setDisplay(strResult);
+    if(!validateOperators(display).length){
+        console.log(e.target);
+        const expression=document.getElementById("display").innerHTML;
+        console.log(expression);
+        const result=eval(expression);
+        console.log(result);
+        const strResult=result.toString();
+        setDisplay(strResult);
+    }else{
+
+    }
   };
 
   return (
     <div id="calculator-div">
       <div id="buttons-div">
-      {/* <textarea name="display" id="display" value={display} /> */}
       <label id="display">{display}</label>
         <button id="clear" onClick={(e)=>setDisplay('0')}>AC</button>
         <button id="divide" onClick={handleAddKey}>/</button>
