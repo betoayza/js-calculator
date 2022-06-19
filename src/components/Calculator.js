@@ -4,46 +4,64 @@ export const Calculator = () => {
   const [display, setDisplay] = useState("0");
 
   const validateOperators = (expression) => {
-    const regExp=/([\+|\-|\*|\/]){2,}/;
-    const match = expression.match(regExp);
-    console.log(match[0]);   
-    return match;
+    try {
+      const regExp=/([\+|\-|\*|\/]){2,}/;
+      const match = expression.match(regExp);
+      if(match){
+        console.log(match[0]);
+        const operators=match[0];
+        //if last char is not "-", take last
+        const lastOperator=operators.charAt(operators.length - 1);
+        if(lastOperator !== "-"){
+          expression=expression.replace(operators, lastOperator);
+          //setDisplay(expression);  
+        }  
+      }      
+      return expression;    
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleAddKey = (e) => {
-    console.log(e);
-    console.log(e.target.innerHTML);
-    const key = e.target.innerHTML;
-    if (display === "0" && key !== ".") {
-      setDisplay(key);
-    } else {
-      if (display.includes(".") && key !== ".") {
-        let expression = display + key;
-        setDisplay(expression);
+    try {
+      console.log(e);
+      console.log(e.target.innerHTML);
+      const key = e.target.innerHTML;
+      if (display === "0" && key !== ".") {
+        setDisplay(key);
       } else {
-        if (!display.includes(".")) {
-          let expression2 = display + key;
-          setDisplay(expression2);
+        if (display.includes(".") && key !== ".") {
+          let expression = display + key;
+          setDisplay(expression);
         } else {
-          if (display.includes(".") && key === ".") {
-            setDisplay(display);
+          if (!display.includes(".")) {
+            let expression2 = display + key;
+            setDisplay(expression2);
+          } else {
+            if (display.includes(".") && key === ".") {
+              setDisplay(display);
+            }
           }
         }
-      }
+      }      
+    } catch (error) {
+      console.error(error);
     }
   };
 
   const handleResult = (e) => {
-    console.log(e.target);
-    if (!validateOperators(display)) {
-      const expression = document.getElementById("display").innerHTML;
-      console.log(expression);
-      const result = eval(expression);
-      console.log(result);
-      const strResult = result.toString();
-      setDisplay(strResult);
-    }else{
-      console.log("Expresion regular mal escrita");
+    try {
+      console.log(e.target);
+      const expression=validateOperators(display);      
+        console.log(expression);
+        //const expression=display;
+        const result = eval(expression);
+        console.log(result);
+        const strResult = result.toString();
+        setDisplay(strResult);     
+    } catch (error) {
+      console.error(error);
     }
   };
 
