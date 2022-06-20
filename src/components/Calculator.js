@@ -3,6 +3,15 @@ import React, { useState } from "react";
 export const Calculator = () => {
   const [display, setDisplay] = useState("0");
 
+  const checkPointLastTerm=(expression)=>{
+    let flag=false;
+    let termsArray = expression.split(/([\+|\-|\*|\/])/);
+    if(termsArray[termsArray.length-1].includes(".")){
+      flag=true;
+    } 
+    return flag;
+  };
+
   const validateOperators = (expression) => {
     try {
       const regExp=/([\+|\-|\*|\/]){2,}/;
@@ -31,15 +40,15 @@ export const Calculator = () => {
       if (display === "0" && key !== ".") {
         setDisplay(key);
       } else {
-        if (display.includes(".") && key !== ".") {
+        if (checkPointLastTerm(display)===true && key !== ".") {
           let expression = display + key;
           setDisplay(expression);
         } else {
-          if (!display.includes(".")) {
+          if (checkPointLastTerm(display)===false) {
             let expression2 = display + key;
             setDisplay(expression2);
           } else {
-            if (display.includes(".") && key === ".") {
+            if (checkPointLastTerm(display) && key === ".") {
               setDisplay(display);
             }
           }
