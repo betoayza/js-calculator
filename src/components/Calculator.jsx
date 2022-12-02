@@ -76,147 +76,169 @@ export const Calculator = () => {
 
   return (
     <div
-      id="buttons-div"
-      className={"w-auto h-auto rounded"}
-      style={{ border: "5px solid", borderColor: "#adff2f" }}
+      className={"rounded p-0 h-auto container"}
+      style={{
+        border: "5px solid",
+        borderColor: "#adff2f",
+        display: "grid",
+        gridTemplateRows: "auto auto",
+      }}
     >
-      <label id="display">{display}</label>
-      <button
-        className={"btn btn-danger border border-dark border-3"}
-        id="clear"
-        onClick={(e) => setDisplay("0")}
-        style={{ fontWeight: "bold" }}
-      >
-        AC
-      </button>
-      <button
-        className={"btn btn-warning border border-dark border-3"}
-        id="divide"
-        onClick={handleAddKey}
-        style={{ fontWeight: "bold" }}
-      >
-        /
-      </button>
-      <button
-        className={"btn btn-warning border border-dark border-3"}
-        id="multiply"
-        onClick={handleAddKey}
-        style={{ fontWeight: "bold" }}
-      >
-        *
-      </button>
-      <button
-        className={"btn btn-light border border-dark border-3"}
-        id="seven"
-        onClick={handleAddKey}
-        style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
-      >
-        7
-      </button>
-      <button
-        className={"btn btn-light border border-dark border-3"}
-        id="eight"
-        onClick={handleAddKey}
-        style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
-      >
-        8
-      </button>
-      <button
-        className={"btn btn-light border border-dark border-3"}
-        id="nine"
-        onClick={handleAddKey}
-        style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
-      >
-        9
-      </button>
-      <button
-        className={"btn btn-warning border border-dark border-3"}
-        id="subtract"
-        onClick={handleAddKey}
-        style={{ fontWeight: "bold" }}
-      >
-        -
-      </button>
-      <button
-        className={"btn btn-light border border-dark border-3"}
-        id="four"
-        onClick={handleAddKey}
-        style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
-      >
-        4
-      </button>
-      <button
-        className={"btn btn-light border border-dark border-3"}
-        id="five"
-        onClick={handleAddKey}
-        style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
-      >
-        5
-      </button>
-      <button
-        className={"btn btn-light border border-dark border-3"}
-        id="six"
-        onClick={handleAddKey}
-        style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
-      >
-        6
-      </button>
-      <button
-        className={"btn btn-warning border border-dark border-3"}
-        id="add"
-        onClick={handleAddKey}
-        style={{ fontWeight: "bold" }}
-      >
-        +
-      </button>
-      <button
-        className={"btn btn-light border border-dark border-3"}
-        id="one"
-        onClick={handleAddKey}
-        style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
-      >
-        1
-      </button>
-      <button
-        className={"btn btn-light border border-dark border-3"}
-        id="two"
-        onClick={handleAddKey}
-        style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
-      >
-        2
-      </button>
-      <button
-        className={"btn btn-light border border-dark border-3"}
-        id="three"
-        onClick={handleAddKey}
-        style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
-      >
-        3
-      </button>
-      <button
-        className={"btn btn-success border border-dark border-3"}
-        id="equals"
-        onClick={handleResult}
-        style={{ fontWeight: "bold" }}
-      >
-        =
-      </button>
-      <button
-        className={"btn btn-light border border-dark border-3"}
-        id="zero"
-        onClick={handleAddKey}
-        style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
-      >
-        0
-      </button>
-      <button
-        className={"btn btn-secondary border border-dark border-3"}
-        id="decimal"
-        onClick={handleAddKey}
-        style={{ fontWeight: "bold" }}
-      >
-        .
-      </button>
+      <div className={"h-auto"}>
+        <textarea
+          name="display"
+          id="display"
+          value={display}
+          style={{
+            backgroundColor: "black",
+            color: "yellowgreen",
+            width: "100%",
+          }}
+        />
+
+        <div
+          id="buttons-div"
+          className={""}
+          style={{ display: "grid", justifyContent: "stretch" }}
+        >
+          <button
+            className={"btn btn-danger border border-dark border-3"}
+            id="clear"
+            onClick={(e) => setDisplay("0")}
+            style={{ fontWeight: "bold" }}
+          >
+            AC
+          </button>
+          <button
+            className={"btn btn-warning border border-dark border-3"}
+            id="divide"
+            onClick={handleAddKey}
+            style={{ fontWeight: "bold" }}
+          >
+            /
+          </button>
+          <button
+            className={"btn btn-warning border border-dark border-3"}
+            id="multiply"
+            onClick={handleAddKey}
+            style={{ fontWeight: "bold" }}
+          >
+            *
+          </button>
+          <button
+            className={"btn btn-light border border-dark border-3"}
+            id="seven"
+            onClick={handleAddKey}
+            style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
+          >
+            7
+          </button>
+          <button
+            className={"btn btn-light border border-dark border-3"}
+            id="eight"
+            onClick={handleAddKey}
+            style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
+          >
+            8
+          </button>
+          <button
+            className={"btn btn-light border border-dark border-3"}
+            id="nine"
+            onClick={handleAddKey}
+            style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
+          >
+            9
+          </button>
+          <button
+            className={"btn btn-warning border border-dark border-3"}
+            id="subtract"
+            onClick={handleAddKey}
+            style={{ fontWeight: "bold" }}
+          >
+            -
+          </button>
+          <button
+            className={"btn btn-light border border-dark border-3"}
+            id="four"
+            onClick={handleAddKey}
+            style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
+          >
+            4
+          </button>
+          <button
+            className={"btn btn-light border border-dark border-3"}
+            id="five"
+            onClick={handleAddKey}
+            style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
+          >
+            5
+          </button>
+          <button
+            className={"btn btn-light border border-dark border-3"}
+            id="six"
+            onClick={handleAddKey}
+            style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
+          >
+            6
+          </button>
+          <button
+            className={"btn btn-warning border border-dark border-3"}
+            id="add"
+            onClick={handleAddKey}
+            style={{ fontWeight: "bold" }}
+          >
+            +
+          </button>
+          <button
+            className={"btn btn-light border border-dark border-3"}
+            id="one"
+            onClick={handleAddKey}
+            style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
+          >
+            1
+          </button>
+          <button
+            className={"btn btn-light border border-dark border-3"}
+            id="two"
+            onClick={handleAddKey}
+            style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
+          >
+            2
+          </button>
+          <button
+            className={"btn btn-light border border-dark border-3"}
+            id="three"
+            onClick={handleAddKey}
+            style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
+          >
+            3
+          </button>
+          <button
+            className={"btn btn-success border border-dark border-3"}
+            id="equals"
+            onClick={handleResult}
+            style={{ fontWeight: "bold" }}
+          >
+            =
+          </button>
+          <button
+            className={"btn btn-light border border-dark border-3"}
+            id="zero"
+            onClick={handleAddKey}
+            style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
+          >
+            0
+          </button>
+          <button
+            className={"btn btn-secondary border border-dark border-3"}
+            id="decimal"
+            onClick={handleAddKey}
+            style={{ fontWeight: "bold" }}
+          >
+            .
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

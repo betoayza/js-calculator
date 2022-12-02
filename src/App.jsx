@@ -4,10 +4,14 @@ import { Calculator } from "./components/Calculator";
 function App() {
   return (
     <div
-      className="App w-auto"
-      style={{ display: "grid", placeItems: "center", height: "100vh" }}
+      className="App container h-auto"
+      style={{
+        display: "grid",
+        placeItems: "center",        
+      }}
     >
-      {/* <h1>JS Calculator</h1> */}
+      <h1 style={{ color: "#ffcc33" }}>JS Calculator</h1>
+
       <Calculator />
     </div>
   );
