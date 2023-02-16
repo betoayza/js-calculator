@@ -2,6 +2,12 @@ import React, { useState } from "react";
 
 export const Calculator = () => {
   const [display, setDisplay] = useState("0");
+  const regExp_multipleOperators = /([\+|\-|\*|\/]){2,}/;
+  const regExp_iniciateWithOperators = /^([\+|\-|\*|\/])/;
+  const regExp_iniciate_with_operators = /^(\+|\-|\*|\/)/;
+  const regExp_some_operator = /(\+|\-|\*|\/)/;
+  const regExp_numbers = /[0-9]/;
+  const regExp_points = /\./g;
 
   const checkPointLastTerm = (expression) => {
     let flag = false;
@@ -12,50 +18,70 @@ export const Calculator = () => {
     return flag;
   };
 
-  const validateOperators = (expression) => {
+  const checkErrors = (expression) => {
     try {
-      const regExp = /([\+|\-|\*|\/]){2,}/;
-      const match = expression.match(regExp);
-      if (match) {
-        console.log(match[0]);
-        const operators = match[0];
-        //if last char is not "-", take last
-        const lastOperator = operators.charAt(operators.length - 1);
-        if (lastOperator !== "-") {
-          expression = expression.replace(operators, lastOperator);
-          //setDisplay(expression);
-        }
+      // Si habia otro punto decimal devuelve error
+      let match4 = expression.match(regExp_points);
+      console.log(match4);
+      if (match4) {
+        let count = match4.length;
+        if (count > 1) return true;
       }
-      return expression;
+      // FILTRAR ERRORES RELACIONADOS CON OPERADORES
+      // -------------------------------------------
+
+      if (expression.match(regExp_some_operator) !== null) {
+        // Si empieza con algun operador
+        let match = expression.match(regExp_iniciate_with_operators);
+        // Si hay operadores repetidos
+        let match2 = expression.match(regExp_multipleOperators);
+        console.log(match, match2);
+
+        if (match || match2) return true;
+      }
+
+      // Si ya habia otro punto
+      // if (display.includes(".") === true && expression === ".") return true;
+
+      // si empieza con 0 y la nueva entrada es un punto
+      if (expression === "0.") {
+        return false;
+      }
+
+      // si la entrada se trata de un numero del 0-9
+      let match3 = expression.match(regExp_numbers);
+      console.log(match3);
+
+      if (display === "0." && match3) return false;
+
+      if (match3) return false;
+
+      else {
+        return true;
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleAddKey = (e) => {
-    try {
-      console.log(e);
-      console.log(e.target.innerHTML);
-      const key = e.target.innerHTML;
-      if (display === "0" && key !== ".") {
-        setDisplay(key);
-      } else {
-        if (checkPointLastTerm(display) === true && key !== ".") {
-          let expression = display + key;
-          setDisplay(expression);
-        } else {
-          if (checkPointLastTerm(display) === false) {
-            let expression2 = display + key;
-            setDisplay(expression2);
-          } else {
-            if (checkPointLastTerm(display) && key === ".") {
-              setDisplay(display);
-            }
-          }
-        }
-      }
-    } catch (error) {
-      console.error(error);
+    // console.log(e);
+    console.log(e.target.innerHTML, typeof e.target.innerHTML);
+
+    const key = e.target.innerHTML;
+    let expression;
+
+    if (display !== "0" || (display === "0" && key === ".")) {
+      expression = display + key;
+    } else {
+      expression = key;
+    }
+
+    let isErrors = checkErrors(expression);
+    console.log(isErrors);
+
+    if (!isErrors) {
+      setDisplay(expression);
     }
   };
 
@@ -94,6 +120,7 @@ export const Calculator = () => {
             color: "yellowgreen",
             width: "100%",
           }}
+          readOnly // avoid input keyboard
         />
 
         <div
