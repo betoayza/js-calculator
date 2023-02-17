@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import audioPressButton from "../assets/audio/apretar-boton.mp3";
 
 export const Calculator = () => {
   const [display, setDisplay] = useState("0");
@@ -7,11 +8,10 @@ export const Calculator = () => {
   const regExp_some_operator = /(\+|\-|\*|\/)/;
   const regExp_numbers = /[0-9]/;
   const regExp_points = /\./g;
-  
 
   const checkErrors = (expression) => {
     try {
-      //  1° Valida si ya habia otro punto decimal. 
+      //  1° Valida si ya habia otro punto decimal.
       let match4 = expression.match(regExp_points);
       console.log(match4);
       if (match4) {
@@ -29,7 +29,7 @@ export const Calculator = () => {
         // console.log(match, match2);
 
         if (match || match2) return true; // ambos casos dan error
-      }     
+      }
 
       // CASO "0.""
       if (expression === "0.") {
@@ -45,7 +45,6 @@ export const Calculator = () => {
 
       // caso normal de numeros
       if (match3) return false; // no da error
-
       // cualquier otro caso da error
       else {
         return true;
@@ -56,6 +55,8 @@ export const Calculator = () => {
   };
 
   const handleAddKey = (e) => {
+    const audioKey = new Audio(audioPressButton);
+    audioKey.play();
     // console.log(e);
     // console.log(e.target.innerHTML, typeof e.target.innerHTML);
 
@@ -79,6 +80,8 @@ export const Calculator = () => {
   };
 
   const handleResult = (e) => {
+    const audioKey = new Audio(audioPressButton);
+    audioKey.play();
     try {
       const result = eval(display); // convierte la expresión a un resultado numerico
       // console.log(result);
@@ -125,7 +128,11 @@ export const Calculator = () => {
           <button
             className={"btn btn-danger border border-dark border-3 btn-square"}
             id="clear"
-            onClick={(e) => setDisplay("0")}
+            onClick={(e) => {
+              setDisplay("0");
+              const audioKey = new Audio(audioPressButton);
+              audioKey.play();
+            }}
             style={{ fontWeight: "bold" }}
           >
             AC
