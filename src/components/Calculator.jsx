@@ -9,14 +9,14 @@ export const Calculator = () => {
   const regExp_numbers = /[0-9]/;
   const regExp_points = /\./g;
 
-  const checkPointLastTerm = (expression) => {
-    let flag = false;
-    let termsArray = expression.split(/([\+|\-|\*|\/])/);
-    if (termsArray[termsArray.length - 1].includes(".")) {
-      flag = true;
-    }
-    return flag;
-  };
+  // const checkPointLastTerm = (expression) => {
+  //   let flag = false;
+  //   let termsArray = expression.split(/([\+|\-|\*|\/])/);
+  //   if (termsArray[termsArray.length - 1].includes(".")) {
+  //     flag = true;
+  //   }
+  //   return flag;
+  // };
 
   const checkErrors = (expression) => {
     try {
@@ -55,7 +55,6 @@ export const Calculator = () => {
       if (display === "0." && match3) return false;
 
       if (match3) return false;
-
       else {
         return true;
       }
@@ -87,11 +86,7 @@ export const Calculator = () => {
 
   const handleResult = (e) => {
     try {
-      console.log(e.target);
-      const expression = validateOperators(display);
-      console.log(expression);
-      //const expression=display;
-      const result = eval(expression);
+      const result = eval(display);
       console.log(result);
       const strResult = result.toString();
       setDisplay(strResult);
@@ -102,34 +97,39 @@ export const Calculator = () => {
 
   return (
     <div
-      className={"rounded p-0 h-auto container"}
+      className={"rounded p-0 h-auto"}
       style={{
         border: "5px solid",
         borderColor: "#adff2f",
         display: "grid",
         gridTemplateRows: "auto auto",
+        backgroundColor: "#a2a2d0",
       }}
     >
       <div className={"h-auto"}>
-        <textarea
-          name="display"
-          id="display"
-          value={display}
-          style={{
-            backgroundColor: "black",
-            color: "yellowgreen",
-            width: "100%",
-          }}
-          readOnly // avoid input keyboard
-        />
+        <div className={"p-2"}>
+          <textarea
+            name="display"
+            id="display"
+            value={display}
+            style={{
+              backgroundColor: "black",
+              color: "yellowgreen",
+              width: "100%",
+              borderColor: "cyan",
+            }}
+            className={"rounded container"}
+            readOnly // avoid input keyboard
+          />
+        </div>
 
         <div
-          id="buttons-div"
-          className={""}
+          id="keyboard-div"
+          className={"container p-2"}
           style={{ display: "grid", justifyContent: "stretch" }}
         >
           <button
-            className={"btn btn-danger border border-dark border-3"}
+            className={"btn btn-danger border border-dark border-3 btn-square"}
             id="clear"
             onClick={(e) => setDisplay("0")}
             style={{ fontWeight: "bold" }}
@@ -137,7 +137,7 @@ export const Calculator = () => {
             AC
           </button>
           <button
-            className={"btn btn-warning border border-dark border-3"}
+            className={"btn btn-warning border border-dark border-3 btn-square"}
             id="divide"
             onClick={handleAddKey}
             style={{ fontWeight: "bold" }}
@@ -145,7 +145,7 @@ export const Calculator = () => {
             /
           </button>
           <button
-            className={"btn btn-warning border border-dark border-3"}
+            className={"btn btn-warning border border-dark border-3 btn-square"}
             id="multiply"
             onClick={handleAddKey}
             style={{ fontWeight: "bold" }}
@@ -153,7 +153,7 @@ export const Calculator = () => {
             *
           </button>
           <button
-            className={"btn btn-light border border-dark border-3"}
+            className={"btn btn-light border border-dark border-3 btn-square"}
             id="seven"
             onClick={handleAddKey}
             style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
@@ -161,7 +161,7 @@ export const Calculator = () => {
             7
           </button>
           <button
-            className={"btn btn-light border border-dark border-3"}
+            className={"btn btn-light border border-dark border-3 btn-square"}
             id="eight"
             onClick={handleAddKey}
             style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
@@ -169,7 +169,7 @@ export const Calculator = () => {
             8
           </button>
           <button
-            className={"btn btn-light border border-dark border-3"}
+            className={"btn btn-light border border-dark border-3 btn-square"}
             id="nine"
             onClick={handleAddKey}
             style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
@@ -177,7 +177,7 @@ export const Calculator = () => {
             9
           </button>
           <button
-            className={"btn btn-warning border border-dark border-3"}
+            className={"btn btn-warning border border-dark border-3 btn-square"}
             id="subtract"
             onClick={handleAddKey}
             style={{ fontWeight: "bold" }}
@@ -185,7 +185,7 @@ export const Calculator = () => {
             -
           </button>
           <button
-            className={"btn btn-light border border-dark border-3"}
+            className={"btn btn-light border border-dark border-3 btn-square"}
             id="four"
             onClick={handleAddKey}
             style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
@@ -193,7 +193,7 @@ export const Calculator = () => {
             4
           </button>
           <button
-            className={"btn btn-light border border-dark border-3"}
+            className={"btn btn-light border border-dark border-3 btn-square"}
             id="five"
             onClick={handleAddKey}
             style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
@@ -201,7 +201,7 @@ export const Calculator = () => {
             5
           </button>
           <button
-            className={"btn btn-light border border-dark border-3"}
+            className={"btn btn-light border border-dark border-3 btn-square"}
             id="six"
             onClick={handleAddKey}
             style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
@@ -209,7 +209,7 @@ export const Calculator = () => {
             6
           </button>
           <button
-            className={"btn btn-warning border border-dark border-3"}
+            className={"btn btn-warning border border-dark border-3 btn-square"}
             id="add"
             onClick={handleAddKey}
             style={{ fontWeight: "bold" }}
@@ -217,7 +217,7 @@ export const Calculator = () => {
             +
           </button>
           <button
-            className={"btn btn-light border border-dark border-3"}
+            className={"btn btn-light border border-dark border-3 btn-square"}
             id="one"
             onClick={handleAddKey}
             style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
@@ -225,7 +225,7 @@ export const Calculator = () => {
             1
           </button>
           <button
-            className={"btn btn-light border border-dark border-3"}
+            className={"btn btn-light border border-dark border-3 btn-square"}
             id="two"
             onClick={handleAddKey}
             style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
@@ -233,7 +233,7 @@ export const Calculator = () => {
             2
           </button>
           <button
-            className={"btn btn-light border border-dark border-3"}
+            className={"btn btn-light border border-dark border-3 btn-square"}
             id="three"
             onClick={handleAddKey}
             style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
@@ -241,7 +241,7 @@ export const Calculator = () => {
             3
           </button>
           <button
-            className={"btn btn-success border border-dark border-3"}
+            className={"btn btn-success border border-dark border-3 btn-square"}
             id="equals"
             onClick={handleResult}
             style={{ fontWeight: "bold" }}
@@ -249,7 +249,7 @@ export const Calculator = () => {
             =
           </button>
           <button
-            className={"btn btn-light border border-dark border-3"}
+            className={"btn btn-light border border-dark border-3 btn-square"}
             id="zero"
             onClick={handleAddKey}
             style={{ backgroundColor: "#20c997", fontWeight: "bold" }}
@@ -257,7 +257,9 @@ export const Calculator = () => {
             0
           </button>
           <button
-            className={"btn btn-secondary border border-dark border-3"}
+            className={
+              "btn btn-secondary border border-dark border-3 btn-square"
+            }
             id="decimal"
             onClick={handleAddKey}
             style={{ fontWeight: "bold" }}
