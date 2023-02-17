@@ -3,58 +3,50 @@ import React, { useState } from "react";
 export const Calculator = () => {
   const [display, setDisplay] = useState("0");
   const regExp_multipleOperators = /([\+|\-|\*|\/]){2,}/;
-  const regExp_iniciateWithOperators = /^([\+|\-|\*|\/])/;
   const regExp_iniciate_with_operators = /^(\+|\-|\*|\/)/;
   const regExp_some_operator = /(\+|\-|\*|\/)/;
   const regExp_numbers = /[0-9]/;
   const regExp_points = /\./g;
-
-  // const checkPointLastTerm = (expression) => {
-  //   let flag = false;
-  //   let termsArray = expression.split(/([\+|\-|\*|\/])/);
-  //   if (termsArray[termsArray.length - 1].includes(".")) {
-  //     flag = true;
-  //   }
-  //   return flag;
-  // };
+  
 
   const checkErrors = (expression) => {
     try {
-      // Si habia otro punto decimal devuelve error
+      //  1° Valida si ya habia otro punto decimal. 
       let match4 = expression.match(regExp_points);
       console.log(match4);
       if (match4) {
         let count = match4.length;
-        if (count > 1) return true;
+        if (count > 1) return true; // si habia devuelve error
       }
+
       // FILTRAR ERRORES RELACIONADOS CON OPERADORES
       // -------------------------------------------
-
       if (expression.match(regExp_some_operator) !== null) {
         // Si empieza con algun operador
         let match = expression.match(regExp_iniciate_with_operators);
         // Si hay operadores repetidos
         let match2 = expression.match(regExp_multipleOperators);
-        console.log(match, match2);
+        // console.log(match, match2);
 
-        if (match || match2) return true;
-      }
+        if (match || match2) return true; // ambos casos dan error
+      }     
 
-      // Si ya habia otro punto
-      // if (display.includes(".") === true && expression === ".") return true;
-
-      // si empieza con 0 y la nueva entrada es un punto
+      // CASO "0.""
       if (expression === "0.") {
-        return false;
+        return false; // no hay error
       }
 
-      // si la entrada se trata de un numero del 0-9
+      // CASOS RELACIONADOS CON LA ENTRADA DE NUMEROS
       let match3 = expression.match(regExp_numbers);
-      console.log(match3);
+      // console.log(match3);
 
-      if (display === "0." && match3) return false;
+      // ... y habia un "0."
+      if (display === "0." && match3) return false; // no hay error
 
-      if (match3) return false;
+      // caso normal de numeros
+      if (match3) return false; // no da error
+
+      // cualquier otro caso da error
       else {
         return true;
       }
@@ -65,7 +57,7 @@ export const Calculator = () => {
 
   const handleAddKey = (e) => {
     // console.log(e);
-    console.log(e.target.innerHTML, typeof e.target.innerHTML);
+    // console.log(e.target.innerHTML, typeof e.target.innerHTML);
 
     const key = e.target.innerHTML;
     let expression;
@@ -76,9 +68,11 @@ export const Calculator = () => {
       expression = key;
     }
 
+    // validar errores en la expresion
     let isErrors = checkErrors(expression);
-    console.log(isErrors);
+    // console.log(isErrors);
 
+    // si no hay errores, actualiza la pantalla
     if (!isErrors) {
       setDisplay(expression);
     }
@@ -86,8 +80,8 @@ export const Calculator = () => {
 
   const handleResult = (e) => {
     try {
-      const result = eval(display);
-      console.log(result);
+      const result = eval(display); // convierte la expresión a un resultado numerico
+      // console.log(result);
       const strResult = result.toString();
       setDisplay(strResult);
     } catch (error) {
